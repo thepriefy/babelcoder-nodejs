@@ -19,6 +19,8 @@
   },
   "_moduleAliases": {
     "@root": ".",
-    "@controllers": "./src/controllers"
+    "@controllers": "./src/controllers",
+    "@models": "./src/models",
+    "@serialzers": "./src/serializers"
   }
 }
