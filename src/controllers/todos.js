@@ -1,5 +1,5 @@
 import { Todo } from '@models'
-import { Todo as TodoSerializer } from '@serialzers'
+import { Todos as TodoSerializer } from '@serialzers'
 
 const list = (req, res) => {
   res.send('List Todos')
