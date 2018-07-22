@@ -3,6 +3,8 @@ import path from 'path'
 import express from 'express'
 import mongoose from 'mongoose'
 
+import config from '../config'
+
 const app = express()
 
 // app.get('/', (req, res) => {
@@ -11,9 +13,7 @@ const app = express()
 
 // return promise
 function setupDatabase() {
-  return mongoose.connect(
-    'mongodb://admin:passw0rd@ds145881.mlab.com:45881/todo-list-mongo'
-  )
+  return mongoose.connect(config.databaseUrl)
 }
 
 function setupRoutes() {
@@ -44,8 +44,8 @@ export function setup() {
   setupRoutes()
 
   setupDatabase().then(() => {
-    app.listen(3000, '0.0.0.0', () => {
-      console.log('listening to port 3000...')
+    app.listen(config.port, config.host, () => {
+      console.log(`listening to port ${config.port}...`)
     })
   })
 }
