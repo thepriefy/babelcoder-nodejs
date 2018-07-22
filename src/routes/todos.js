@@ -2,5 +2,5 @@
 import { todos as controller } from '@controllers'
 
 export function setupRoutes(router) {
-  router.get('/todos', controller.list)
+  router.get('/', controller.list).get('/:id', controller.show)
 }

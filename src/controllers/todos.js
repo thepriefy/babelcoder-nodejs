@@ -1,5 +1,9 @@
 const list = (req, res) => {
-  res.send('Controller Todos')
+  res.send('List Todos')
 }
 
-export default { list }
+const show = (req, res) => {
+  res.send('Show Todos')
+}
+
+export default { list, show }

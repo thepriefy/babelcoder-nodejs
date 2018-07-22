@@ -1,6 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import express from 'express'
+import mongoose from 'mongoose'
 
 const app = express()
 
@@ -9,9 +10,11 @@ const app = express()
 // })
 
 // return promise
-// function setupDatabase() {
-//   return mongoose.connect('mongodb://...')
-// }
+function setupDatabase() {
+  return mongoose.connect(
+    'mongodb://admin:passw0rd@ds145881.mlab.com:45881/todo-list-mongo'
+  )
+}
 
 function setupRoutes() {
   // list files in controller dorectory
@@ -33,14 +36,16 @@ function setupRoutes() {
       })
 
     //...
-    app.use('/', router)
+    app.use(`/${resourceName}`, router)
   })
 }
 
 export function setup() {
   setupRoutes()
-  // setupDB { app listen }
-  app.listen(3000, '0.0.0.0', () => {
-    console.log('listening to port 3000...')
+
+  setupDatabase().then(() => {
+    app.listen(3000, '0.0.0.0', () => {
+      console.log('listening to port 3000...')
+    })
   })
 }
