@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import express from 'express'
 import mongoose from 'mongoose'
+import bodyParser from 'body-parser'
 
 import config from '../config'
 
@@ -13,7 +14,10 @@ const app = express()
 
 // return promise
 function setupDatabase() {
-  return mongoose.connect(config.databaseUrl)
+  return mongoose.connect(
+    config.databaseUrl,
+    { useNewUrlParser: true }
+  )
 }
 
 function setupRoutes() {
@@ -41,6 +45,9 @@ function setupRoutes() {
 }
 
 export function setup() {
+  app.use(bodyParser.urlencoded({ extended: true }))
+  app.use(bodyParser.json())
+
   setupRoutes()
 
   setupDatabase().then(() => {

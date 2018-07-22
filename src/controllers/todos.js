@@ -6,4 +6,9 @@ const show = (req, res) => {
   res.send('Show Todos')
 }
 
-export default { list, show }
+const create = (req, res) => {
+  console.log(req.body)
+  res.send('Create')
+}
+
+export default { list, show, create }
